@@ -20,8 +20,7 @@ app.get("/send/:toUserId/:roomId/:messageId", async (req, res) => {
     const messageId = req.params["messageId"];
 
     const toUserDoc = await usersDb.doc(toUserId).get(); 
-
-    if (!toUserDoc.exists) {
+    if (!toUserDoc.exists || !("notification_token" in toUserDoc.data())) {
         console.log('No user ' + toUserId);
         res.send({"type": "error", "message": "InvalidToUserId"});
         return;
