@@ -14,10 +14,10 @@ const usersDb = db.collection('users');
 const roomsDb = db.collection('rooms');
 
 app.get("/", (req, res) => res.type('json').send("Pratyush's PadhaiHub Backend Service"));
-app.get("/send/:toUserId/:roomId/:messageId", async (req, res) => {
+app.get("/send/:toUserId/:roomId/", async (req, res) => {
     const toUserId = req.params["toUserId"];
     const roomId = req.params["roomId"];
-    const messageId = req.params["messageId"];
+    // const messageId = req.params["messageId"];
 
     const toUserDoc = await usersDb.doc(toUserId).get(); 
     if (!toUserDoc.exists || !("notification_token" in toUserDoc.data())) {
@@ -28,20 +28,25 @@ app.get("/send/:toUserId/:roomId/:messageId", async (req, res) => {
         console.log(toUserDoc.data());
     }
 
-    const messageDoc = await roomsDb.doc(`${roomId}/messages/${messageId}`).get();
+    // const messageDoc = await roomsDb.doc(`${roomId}/messages/${messageId}`).get();
+    const messageDoc = await roomsDb.doc(`${roomId}`).get();
 
     if (!messageDoc.exists) {
-        console.log('No message ' + messageId + ' or room ' + roomId);
+        // console.log('No message ' + messageId + ' or room ' + roomId);
+        console.log('No room exists: ' + roomId);
         res.send({"type": "error", "message": "InvalidMessageOrRoom"});
         return;
     } else {
         console.log(messageDoc.data());
     }
 
-    const fromUserDoc = await usersDb.doc(messageDoc.data()["authorId"]).get(); 
+    const fromUserId = messageDoc.data()["userIds"].filter(function(user) {
+        return user != toUserId
+    })[0];
+    const fromUserDoc = await usersDb.doc(fromUserId).get(); 
 
     if (!fromUserDoc.exists) {
-        console.log('No (from) user ' + messageDoc.data()["authorId"]);
+        console.log('No (from) user ' + fromUserId);
         res.send({"type": "error", "message": "InvalidFromUserId"});
         return;
     }
