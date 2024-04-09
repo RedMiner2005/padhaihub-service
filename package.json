@@ -1,19 +1,24 @@
 {
-  "name": "express-hello-world",
-  "version": "1.0.0",
-  "description": "Express Hello World on Render",
+  "name": "padhaihub-service",
+  "version": "0.1.0",
+  "description": "Pratyush's PadhaiHub Backend Service",
   "main": "app.js",
-  "repository": "https://github.com/render-examples/express-hello-world",
-  "author": "Render Developers",
+  "repository": "https://github.com/RedMiner2005/padhaihub-service",
+  "author": "Proinators Inc",
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node app.js"
+    "_": "node app.js",
+    "start": "node -r dotenv/config app.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
+    "firebase-admin": "^12.0.0"
   },
   "engines": {
     "node": ">=14"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.5"
   }
 }
