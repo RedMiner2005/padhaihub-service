@@ -68,7 +68,7 @@ app.get("/send/:toUserId/:roomId/", async (req, res) => {
         });
 })
 
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+const server = app.listen(port, () => console.log(`PadhaiHub Service listening on port ${port}!`));
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;

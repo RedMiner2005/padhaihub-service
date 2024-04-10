@@ -1,15 +1,10 @@
-# README
+# padhaihub-service
 
-This is the [Express](https://expressjs.com) [Hello world](https://expressjs.com/en/starter/hello-world.html) example on [Render](https://render.com).
+This is the notification service for the [PadhaiHub project](https://github.com/RedMiner2005/padhaihub-service)
 
-The app in this repo is deployed at [https://express.onrender.com](https://express.onrender.com).
+The app in this repo is deployed at [https://padhaihub-service.onrender.com](https://padhaihub-service.onrender.com).
 
-## Deployment
+# API
+The root URL is meant for testing the server: if it is live, it returns text as HTML.
+Send requests are GET requests with the following format: `/send/(toUserId)/(roomId)`
 
-See https://render.com/docs/deploy-node-express-app or follow the steps below:
-
-Create a new web service with the following values:
-  * Build Command: `yarn`
-  * Start Command: `node app.js`
-
-That's it! Your web service will be live on your Render URL as soon as the build finishes.
